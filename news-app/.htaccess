@@ -1,0 +1,13 @@
+# .htaccess file contents
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /luXew/news-app/
+    
+    # Redirect all requests to public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Protect directory
+Options -Indexes

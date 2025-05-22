@@ -1,0 +1,21 @@
+# .htaccess file contents
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /luXew/news-app/public/
+    
+    # If file or directory doesn't exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Route all requests to index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Security headers
+Header set X-Content-Type-Options "nosniff"
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Frame-Options "SAMEORIGIN"
+
+# Protect directory
+Options -Indexes
