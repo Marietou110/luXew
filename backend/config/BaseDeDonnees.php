@@ -1,44 +1,42 @@
 <?php
 
-class Database {
+class BaseDeDonnees {
     private static $instance = null;
-    private $connection;
-    
-    private $host = 'localhost';
-    private $username = 'massina';
-    private $password = 'passer';
-    private $dbname = 'mglsi_news';
+    private $connexion;
+
+    private $hote = 'localhost';
+    private $nomUtilisateur = 'massina';
+    private $motDePasse = 'passer';
+    private $nomBase = 'Luxew';
     private $charset = 'utf8mb4';
 
     private function __construct() {
         try {
-            $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset={$this->charset}";
+            $dsn = "mysql:host={$this->hote};dbname={$this->nomBase};charset={$this->charset}";
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$this->charset}"
             ];
-
-            $this->connection = new PDO($dsn, $this->username, $this->password, $options);
+            $this->connexion = new PDO($dsn, $this->nomUtilisateur, $this->motDePasse, $options);
         } catch (PDOException $e) {
-            throw new Exception("Connection failed: " . $e->getMessage());
+            throw new Exception("Échec de la connexion : " . $e->getMessage());
         }
     }
 
     private function __clone() {}
-
     private function __wakeup() {}
 
-    public static function getInstance() {
+    public static function obtenirInstance() {
         if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
-        return $this->connection;
+    public function obtenirConnexion() {
+        return $this->connexion;
     }
 }
 ?>

@@ -17,7 +17,7 @@ class AuthController {
             $password = $_POST['password'] ?? '';
 
             if (empty($email) || empty($password)) {
-                header('Location: login.php?error=missing_fields');
+                header('Location: http://localhost/luXew/news-app/public/login?error=missing_fields');
                 exit();
             }
 
@@ -33,7 +33,7 @@ class AuthController {
                 header('Location: index.php?success=login');
                 exit();
             } else {
-                header('Location: login.php?error=invalid_credentials');
+                header('Location: http://localhost/luXew/news-app/public/login?error=invalid_credentials');
                 exit();
             }
         }
@@ -49,22 +49,22 @@ class AuthController {
             $confirmPassword = $_POST['confirm_password'] ?? '';
 
             if (empty($pseudo) || empty($email) || empty($password)) {
-                header('Location: register.php?error=missing_fields');
+                header('Location: http://localhost/luXew/news-app/public/register?error=missing_fields');
                 exit();
             }
 
             if ($password !== $confirmPassword) {
-                header('Location: register.php?error=password_mismatch');
+                header('Location: http://localhost/luXew/news-app/public/register?error=password_mismatch');
                 exit();
             }
 
             if ($this->userModel->getUserByEmail($email)) {
-                header('Location: register.php?error=email_exists');
+                header('Location: http://localhost/luXew/news-app/public/register?error=email_exists');
                 exit();
             }
 
             if ($this->userModel->getUserByPseudo($pseudo)) {
-                header('Location: register.php?error=pseudo_exists');
+                header('Location: http://localhost/luXew/news-app/public/register?error=pseudo_exists');
                 exit();
             }
 
@@ -80,7 +80,7 @@ class AuthController {
                 header('Location: login.php?success=registration');
                 exit();
             } else {
-                header('Location: register.php?error=registration_failed');
+                header('Location: http://localhost/luXew/news-app/public/register?error=registration_failed');
                 exit();
             }
         }
